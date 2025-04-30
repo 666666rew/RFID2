@@ -36,17 +36,7 @@
   </div>
 
   <script>
-    // 模擬 led 控制的物件
-    const led = {
-      on: () => {
-        console.log("LED ON");
-        alert("LED 已開啟");
-      },
-      off: () => {
-        console.log("LED OFF");
-        alert("LED 已關閉");
-      }
-    };
+
 
     // 解析 URL 參數
     const params = new URLSearchParams(window.location.search);
@@ -57,11 +47,7 @@
     document.getElementById('welcome').textContent = `歡迎，${name || '訪客'}！`;
 
     // 根據 light 參數執行對應的動作
-    if (light === 'on') {
-      led.on();
-    } else if (light === 'off') {
-      led.off();
-    }
+
   </script>
 
 
@@ -76,7 +62,11 @@ var led;
 boardReady({board: 'Smart', device: 'YdrMW', transport: 'mqtt', multi: true}, function (board) {
   board.samplingInterval = 50;
   led = getLed(board, 5);
-  
+  if (light === 'on') {
+      led.on();
+    } else if (light === 'off') {
+      led.off();
+    }
 });
 
 </script>
